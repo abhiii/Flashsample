@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>:: Welcome to Telugu VERNNA MALLA ::</title>
+
+<script src="http://code.createjs.com/easeljs-0.6.0.min.js"></script>
+<script src="http://code.createjs.com/tweenjs-0.4.0.min.js"></script>
+<script src="http://code.createjs.com/movieclip-0.6.0.min.js"></script>
+<script src="http://code.createjs.com/preloadjs-0.3.0.min.js"></script>
+<script src="http://code.createjs.com/soundjs-0.4.0.min.js"></script>
+<script type="text/javascript" src="01_04.js"></script>
+
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var manifest = [
+		{src:"images/aaku.jpg", id:"aaku"},
+		{src:"images/aavu.jpg", id:"aavu"},
+		{src:"images/arati.jpg", id:"arati"},
+		{src:"images/bg.jpg", id:"bg"},
+		{src:"images/Bitmap6.png", id:"Bitmap6"},
+		{src:"images/isuka.jpg", id:"isuka"},
+		{src:"images/logo.png", id:"logo"},
+		{src:"images/profile_user_account_human_people_man_login.png", id:"profile_user_account_human_people_man_login"},
+		{src:"images/slate.jpg", id:"slate"},
+		{src:"sounds/_01_03_aa.mp3", id:"_01_03_aa"}
+	];
+
+	var loader = new createjs.LoadQueue(false);
+	loader.installPlugin(createjs.Sound);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib._01_04();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(20);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+
+function playSound(id, loop) {
+	createjs.Sound.play(id, createjs.Sound.INTERRUPT_EARLY, 0, 0, loop);
+}
+</script>
+<style type="text/css">
+<!--
+#main {
+	height: 681px;
+	width: 965px;
+	margin-right: auto;
+	margin-left: auto;
+}
+body {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+#buttons {
+	height: 74px;
+	width: 888px;
+	margin-top: -74px;
+	margin-right: auto;
+	margin-left: auto;
+	line-height: 40px;
+	padding-right: 40px;
+	padding-left: 37px;
+}
+-->
+</style>
+</head>
+
+<body onLoad="init();" style="background-color:#F3BF1E">
+	<div id="main">
+    <canvas id="canvas" width="965" height="681" style="background-color:#ffffff"></canvas>
+    </div>
+    <div id="buttons"><a href="index.html"><img src="images/back.png" width="52" height="74" /></a></div>
+</body>
+</html>
